@@ -7,17 +7,12 @@ from django.core.validators import MinValueValidator, MaxValueValidator
 
 class Book(models.Model):
      title = models.CharField(max_length=255, unique=True, blank=False, null=False)
-     author = models.CharField(max_length=255, blank=False, null=False)
-     desc = models.TextField(blank=True)
-     genre = models.CharField(max_length=255, blank=True)
+     Book_Author = models.CharField(max_length=255, blank=False, null=False)
+     Year_of_Publication = models.DateField()
+     Publisher = models.CharField(max_length=255,blank=False, null=False)
      img = models.CharField(max_length=255, null=False, default="")
-     isbn = models.IntegerField(null=False, blank=False)
-     isbn13 = models.IntegerField(null=False, blank=False)
-     link = models.CharField(max_length=255, null=False, default="")
-     pages = models.IntegerField(validators=[MinValueValidator(1)])
-     rating = models.FloatField()
-     def str(self):
-        return self.title   
+     def __str__(self):
+         return self.title  
      class Meta:
         db_table = 'book'  
 
@@ -33,7 +28,7 @@ class User_Book(models.Model):
          choices=Status.choices,
          default=Status.IN_PROCESS
      )
-     def str(self):
+     def __str__(self):
         return f"{self.user_id}-{self.book_id}"
      class Meta:
          db_table = 'User_Book'
