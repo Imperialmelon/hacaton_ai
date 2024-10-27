@@ -9,8 +9,9 @@
                 {{card.Book_Author}}
             </p>
             <a href="{% url 'book_url' card.id %}" class="btn btn-primary" id="details">Подробнее</a>
-            <form method="post" class="card_form">
-            <button class="btn btn-primary" id="finish_reading" value="{{card.id}}">Добавить</button>
+            <form method="post" class="card_form" action="{% url 'add_book' %}">
+                {% csrf_token %}
+            <button class="btn btn-primary" id="finish_reading" value="{{card.id}}" name="add_button">Добавить</button>
             </form>
         </div>
     </div>

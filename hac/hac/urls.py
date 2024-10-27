@@ -71,16 +71,27 @@ def func():
   id=f'{randint(1,1265)}', # Используйте существующее значение 'title' для обновления
   defaults={'status': 'READ'} # Обновляем поле 'Publisher'
 )
-    
 
+
+def pics():
+    from app.models import Book
+    book_for_user, created = Book.objects.update_or_create(
+        id=6,
+        defaults={'img': 'https://static-cse.canva.com/blob/585523/.png'} 
+    )
+
+pics()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('books/', views.get_user_books),
-    path('<int:pk>/rate', views.estimate_book),
-    path('login/', views.login),
+    path('books/', views.get_user_books, name='books/'),
+    path('rate/', views.estimate_book,name='rate_book'),
+    path('', views.login_html, name=''),
     path('logout/', views.logout_user),
-    path('', views.login_html),
     path('book/<int:pk>/', views.get_book, name='book_url'),
-    path('recs/', views.get_recs)
+    path('recs/', views.get_recs, name= "recs/"),
+    path('search/', views.book_search, name="search/"),
+    path('add/', views.put_book, name='add_book'),
+    path('auth_check', views.login, name='auth_check'),
+    path('finish/', views.finish_book, name='finish')
 ]

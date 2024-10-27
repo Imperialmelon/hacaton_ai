@@ -15,8 +15,8 @@
     <div class="space">
         <div class="header">
             <img src="http://127.0.0.1:9000/hacaton/image.png" class="logo_img">
-            <a href="" class="logo">AI-nnovative Reads</a>
-            <a href="http://127.0.0.1:8000/"><img src="http://127.0.0.1:9000/hacaton/exit.png" class="exit_button"></a>
+            <a href="" class="logo">Booksy</a>
+            <a href="{% url '' %}"><img src="http://127.0.0.1:9000/hacaton/exit.png" class="exit_button"></a>
         </div>
         <div class="container mt-4">
             <div class="row">
@@ -29,9 +29,9 @@
     </div>
     </div>
     <div class="taskbar">
-        <a href="http://127.0.0.1:8000/user_lib"><img src="http://127.0.0.1:9000/hacaton/book_logo.png" class="taskbar-item"></a>
-        <a href="http://127.0.0.1:8000/user_recs/"><img src="http://127.0.0.1:9000/hacaton/explore_logo.png" class="taskbar-item"></a>
-        <a href="http://127.0.0.1:8000/book_search/"><img src="http://127.0.0.1:9000/hacaton/search_logo.png" class="taskbar-item"></a>
-    </div>    
+        <a href="{% url 'books/' %}"><img src="http://127.0.0.1:9000/hacaton/book_logo.png" class="taskbar-item"></a>
+        <a href="{% url 'recs/' %}"><img src="http://127.0.0.1:9000/hacaton/explore_logo.png" class="taskbar-item"></a>
+        <a href="{% url 'search/' %}"><img src="http://127.0.0.1:9000/hacaton/search_logo.png" class="taskbar-item"></a>
+    </div>   
   </body>
 </html>

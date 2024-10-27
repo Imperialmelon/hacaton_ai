@@ -253,6 +253,7 @@
     padding: 10px;
     border-radius: 20px;
     width: 600px !important;
+    margin-left: 40px;
 }
 
 #width_fix {
@@ -313,4 +314,9 @@ button {
 
 #pub_fix {
     width: 200px
+}
+
+
+#quick_fix {
+    margin-bottom: 15px;
 }

@@ -5,21 +5,55 @@
         <img src="{{card.img}}" class="card-img-top" alt="Card image 1">
         <div class="card-body">
             <h5 class="card-title">{{ card.title }}</h5>
-            <p class="card-text">
-                <button class="button" id = "uno" value="1"> 1 </button>
-                <button class="button" id="dos" value="2"> 2 </button>
-                <button class="button"  id="tres" value="3"> 3 </button>
-                <button class="button"  id="quatro" value="4"> 4 </button>
-                <button class="button"  id="cinco" value="5"> 5 </button>
-                <button class="button"  id="seis" value="6"> 6 </button>
-                <button class="button"  id="siete" value="7"> 7 </button>
-                <button class="button"  id="ocho" value="8"> 8 </button>
-                <button class="button"  id="nueve" value="9"> 9 </button>
-                <button class="button"  id="diez" value="10"> 10 </button>
-            </p>
+            <form method="post" class="forma" action ="{% url 'rate_book' %}">
+                {% csrf_token %}
+                <p class="card-text" id="quick_fix">
+                    <button class="button" id = "uno" value="{
+                        'id' : {{card.id}},
+                        'val' : '1'
+                    }" name="test"> 1 </button>
+                    <button class="button" id = "dos" value="{
+                        'id' : {{card.id}},
+                        'val' : '2'
+                    }" name="test"> 2 </button>
+                    <button class="button" id = "tres" value="{
+                        'id' : {{card.id}},
+                        'val' : '3'
+                    }" name="test"> 3 </button>
+                    <button class="button" id = "quatro" value="{
+                        'id' : {{card.id}},
+                        'val' : '4'
+                    }" name="test"> 4 </button>
+                    <button class="button" id = "cinco" value="{
+                        'id' : {{card.id}},
+                        'val' : '5'
+                    }" name="test"> 5 </button>
+                    <button class="button" id = "seis" value="{
+                        'id' : {{card.id}},
+                        'val' : '6'
+                    }" name="test"> 6 </button>
+                    <button class="button" id = "siete" value="{
+                        'id' : {{card.id}},
+                        'val' : '7'
+                    }" name="test"> 7 </button>
+                    <button class="button" id = "ocho" value="{
+                        'id' : {{card.id}},
+                        'val' : '8'
+                    }" name="test"> 8 </button>
+                    <button class="button" id = "nueve" value="{
+                        'id' : {{card.id}},
+                        'val' : '9'
+                    }" name="test"> 9 </button>
+                    <button class="button" id = "diez" value="{
+                        'id' : {{card.id}},
+                        'val' : '10'
+                    }" name="test"> 10 </button>
+                </p>
+            </form>
             <a href="#" class="btn btn-primary" id="details">Подробнее</a>
-            <form method="post" class="card_form">
-            <button class="btn btn-primary" id="finish_reading" value="{{card.id}}">Закончить</button>
+            <form method="post" class="card_form" action="{% url 'finish' %}">
+                {% csrf_token %}
+            <button class="btn btn-primary" id="finish_reading" value="{{card.id}}" name="finish">Закончить</button>
             </form>
         </div>
     </div>

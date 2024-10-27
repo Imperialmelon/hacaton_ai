@@ -14,20 +14,22 @@
   <body>
     <div class="space">
         <div class="container" id="mrg_top">
-            <form>
+            <form method="post" action="{% url  'books/'  %}">
+                {% csrf_token %}
               <img src="http://127.0.0.1:9000/hacaton/image.png" class="logo_img" id="mrg_left">
-              <a href="" class="logo">AI-nnovative Reads</a>
+              <a href="" class="logo">Booksy</a>
               <div class="reg_form">
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Логин</label>
-                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <input class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" name="username">
                 </div>
                 <div class="mb-3">
                   <label for="exampleInputPassword1" class="form-label">Пароль</label>
-                  <input type="password" class="form-control" id="exampleInputPassword1">
+                  <input type="password" class="form-control" id="exampleInputPassword1" name="password">
                 </div>
-                <button type="submit" class="btn btn-primary" id="width_fix"><a href="http://127.0.0.1:8000/user_lib" class="ign_dec">Войти</a></button>
-                <button type="submit" class="btn btn-primary" id="width_fix"><a href="http://127.0.0.1:8000/register/" class="ign_dec">Зарегестрироваться</a></button>
+
+                <button type="submit" class="btn btn-primary" id="width_fix">Войти</button>
+                <!-- <button type="submit" class="btn btn-primary" id="width_fix"><a href="http://127.0.0.1:8000/register/" class="ign_dec">Зарегестрироваться</a></button> -->
               </div>
               </form>
         </div>

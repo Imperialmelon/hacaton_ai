@@ -30,13 +30,13 @@ import pandas as pd
 # @permission_classes([IsAuth])
 # @authentication_classes([Auth_by_Session])
 def get_user_books(request):
+    print(request.user)
     # user_books = book_user.objects.filter(user = request.user)
     user_books = book_user.objects.filter(user_id = 5)
     book_ids = [ub.book_id for ub in user_books]
     books = Book.objects.filter(pk__in=book_ids)
-    print(1)
     serializer = BookSerializaer(books, many=True)
-    return render(request, 'book_search.html', {
+    return render(request, 'user_lib.html', {
         'data' : {
             'book_cards' : books
         }
@@ -48,27 +48,82 @@ def get_book(request, pk):
         'data' : book
     })
 
-@api_view(['PUT'])
-def estimate_book(request, pk):
-        book_id = 2
+
+def finish_book(request):
+    book_id = request.POST.get('finish')
+    pk = 5
+    book_for_user, created = book_user.objects.update_or_create(
+    user_id=pk,
+    book_id=book_id,
+    defaults={'status': 'READ'} 
+  )
+    return get_user_books(request)
+
+
+def estimate_book(request):
+        import json
+        import re
+        pk = 5
+        vals = request.POST.get('test')
+        print(vals)
+        str1_replaced = re.sub("\"", "'", vals)
+        vals = vals.replace("'", '"')
+        str_ = json.loads(vals)
+        book_id,val = str_['id'], str_['val']
+
+        book_for_user, created = book_user.objects.update_or_create(
+    user_id=pk,
+    book_id=book_id,
+    defaults={'user_rating': val} 
+  )
+        return get_user_books(request)
+        print(book_id,val)
         book_for_user = book_user.objects.filter(user_id=pk, book_id=book_id).first()
-        print(book_for_user) 
-        serializer = User_BooksSerializer(book_for_user, data = request.data, partial=True)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(serializer.data, status=status.HTTP_200_OK)
-        else:
-            return Response(status=status.HTTP_400_BAD_REQUEST)
+        # print(book_for_user) 
+        # serializer = User_BooksSerializer(book_for_user, data = request.data, partial=True)
+        # if serializer.is_valid():
+        #     serializer.save()
+        #     return Response(serializer.data, status=status.HTTP_200_OK)
+        # else:
+        #     return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
 def login_html(request):
-    return render(request, 'user_lib.html')
+    return render(request, 'login.html')
+
+
+
      
 
-
+def book_search(request):
+    searched_word = request.GET.get('searched_word', '')  
+    print(1)
+    found_book_cards = Book.objects.filter(title__istartswith=searched_word).order_by('id')
+    print(2)
+    if searched_word:
+        return render(request, 'book_search.html', {'data':  {
+            'book_cards' : found_book_cards,
+            
+        }
+        }
+        )
+    books = Book.objects.all()
+    print(books)
+    return render(request, 'book_search.html', {'data': {
+        'book_cards' : books
+    }})
 
 import numpy as np
 from django.db import connection
+
+def put_book(request):
+    user_id = 5
+    if request.method == "POST":
+        pk = request.POST.get("add_button")
+        book = Book.objects.filter(id=pk).first()
+        book_user.objects.create(user_id = user_id, book_id=book.id, user_rating=10)
+        return get_user_books(request)
+
 
 def get_dataframe_from_table():
 
@@ -206,34 +261,37 @@ def create_user(request):
     return Response('Creation failed', status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
-@permission_classes([AllowAny])
+# @api_view(['POST'])
+# @permission_classes([AllowAny])
 def login(request):
     username = request.POST.get('username')
     password = request.POST.get('password')
     print(username,password)
     user = User.objects.filter(username=username,password=password)
-    print(user)
+    # print(user)
     if user is not None:
-        session_id = str(uuid.uuid4())
-        session_storage.set(session_id, username)
+        # session_id = str(uuid.uuid4())
+        # session_storage.set(session_id, username)
         response = Response(status=status.HTTP_201_CREATED)
-        response.set_cookie("session_id", session_id, samesite="lax")
-        return response
-    return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
+        session_id = request.COOKIES['csrftoken']
+        session_storage.set(session_id, username)
+        # response.set_cookie("user_session_id", session_id, samesite="lax")
+        return get_user_books(request)
+    return render(request, 'login.html')
+    # return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
 
 
-@api_view(['POST'])
+# @api_view(['POST'])
 @permission_classes([IsAuth])
 def logout_user(request):
 
     """
     деавторизация
     """
-    session_id = request.COOKIES["session_id"]
+    session_id = request.COOKIES["csrftoken"]
     print(session_id)
     if session_storage.exists(session_id):
         session_storage.delete(session_id)
-        return Response(status=status.HTTP_204_NO_CONTENT)
+        return login_html(request)
 
     return Response(status=status.HTTP_403_FORBIDDEN)
