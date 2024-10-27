@@ -27,7 +27,12 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['*']
 
-
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+    ],
+}
 # Application definition
 
 INSTALLED_APPS = [
@@ -134,3 +139,6 @@ DATABASES = {
         'PORT': 5432, # Стандартный порт PostgreSQL
     }
 }
+
+REDIS_HOST = '127.0.0.1'
+REDIS_PORT = 6379

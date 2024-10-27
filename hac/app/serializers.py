@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Book,User_Book,User
+from .models import Book,book_user,User
 class BookSerializaer(serializers.ModelSerializer):
     class Meta:
         model=Book
@@ -7,7 +7,7 @@ class BookSerializaer(serializers.ModelSerializer):
 
 class User_BooksSerializer(serializers.ModelSerializer):
     class Meta:
-        model = User_Book
+        model = book_user
         fields = ['book', 'user_rating']
         read_only_fields = ['book']
 
