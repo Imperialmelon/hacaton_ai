@@ -27,11 +27,12 @@ import psycopg2
 import pandas as pd
 
 # @api_view(['GET'])
-# @permission_classes([IsAuth])
-# @authentication_classes([Auth_by_Session])
+@permission_classes([IsAuth])
+@authentication_classes([Auth_by_Session])
 def get_user_books(request):
-    print(request.user)
+    # print(request.user.id)
     # user_books = book_user.objects.filter(user = request.user)
+    
     user_books = book_user.objects.filter(user_id = 5)
     book_ids = [ub.book_id for ub in user_books]
     books = Book.objects.filter(pk__in=book_ids)
@@ -76,6 +77,7 @@ def estimate_book(request):
     book_id=book_id,
     defaults={'user_rating': val} 
   )
+        
         return get_user_books(request)
         print(book_id,val)
         book_for_user = book_user.objects.filter(user_id=pk, book_id=book_id).first()
@@ -226,7 +228,7 @@ def func():
     # return collaborative_filtering_recommendations()
 
     # Пример
-    target_user_id = 2
+    target_user_id = 5
     recommended_books = collaborative_filtering_recommendations(data, target_user_id)
     print(recommended_books) 
     return recommended_books
@@ -279,6 +281,26 @@ def login(request):
         return get_user_books(request)
     return render(request, 'login.html')
     # return Response({'error': 'Invalid Credentials'}, status=status.HTTP_400_BAD_REQUEST)
+
+
+def login_test(request):
+    username = request.POST.get('username')
+    password = request.POST.get('password')
+    print(username,password)
+    user = User.objects.filter(username=username,password=password)
+    # print(user)
+    if user is not None:
+        # session_id = str(uuid.uuid4())
+        # session_storage.set(session_id, username)
+        response = Response(status=status.HTTP_201_CREATED)
+        session_id = request.COOKIES['csrftoken']
+        session_storage.set(session_id, username)
+        # response.set_cookie("user_session_id", session_id, samesite="lax")
+        return get_user_books(request)
+    return render(request, 'login.html')
+
+
+
 
 
 # @api_view(['POST'])

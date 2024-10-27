@@ -60,27 +60,15 @@ import pandas as pd
 
 
 def func():
-    from app.models import book_user
+    from app.models import Book
     from random  import randint
-    for i in range(150):
-        # user_book = book_user(id=randint(1,1265))
-        # user_book.status = 'READ'
-        # user_book.save()
 
-        user_book, created = book_user.objects.update_or_create(
-  id=f'{randint(1,1265)}', # Используйте существующее значение 'title' для обновления
-  defaults={'status': 'READ'} # Обновляем поле 'Publisher'
+    user_book, created = Book.objects.update_or_create(
+  id=7,
+  defaults={'img': 'https://illustrators.ru/uploads/illustration/image/931203/main_%D0%BE%D0%B1%D0%BB%D0%BE%D0%B6%D0%BA%D0%B02.jpg'} # Обновляем поле 'Publisher'
 )
 
-
-def pics():
-    from app.models import Book
-    book_for_user, created = Book.objects.update_or_create(
-        id=6,
-        defaults={'img': 'https://static-cse.canva.com/blob/585523/.png'} 
-    )
-
-pics()
+func()
 
 urlpatterns = [
     path('admin/', admin.site.urls),
