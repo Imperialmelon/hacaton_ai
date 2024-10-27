@@ -59,7 +59,19 @@ import pandas as pd
         
 
 
+def func():
+    from app.models import book_user
+    from random  import randint
+    for i in range(150):
+        # user_book = book_user(id=randint(1,1265))
+        # user_book.status = 'READ'
+        # user_book.save()
 
+        user_book, created = book_user.objects.update_or_create(
+  id=f'{randint(1,1265)}', # Используйте существующее значение 'title' для обновления
+  defaults={'status': 'READ'} # Обновляем поле 'Publisher'
+)
+    
 
 
 urlpatterns = [
@@ -69,5 +81,6 @@ urlpatterns = [
     path('login/', views.login),
     path('logout/', views.logout_user),
     path('', views.login_html),
-    path('book/<int:pk>/', views.get_book, name='book_url')
+    path('book/<int:pk>/', views.get_book, name='book_url'),
+    path('recs/', views.get_recs)
 ]

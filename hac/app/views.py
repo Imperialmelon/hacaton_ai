@@ -65,6 +65,8 @@ def login_html(request):
     return render(request, 'user_lib.html')
      
 
+
+
 import numpy as np
 from django.db import connection
 
@@ -130,7 +132,7 @@ def func():
 
 
 
-    def collaborative_filtering_recommendations(df, target_user_id, num_recommendations=5):
+    def collaborative_filtering_recommendations(df, target_user_id, num_recommendations=6):
 
         user_item_matrix, user_index, book_index = create_user_item_matrix_from_df(df)
 
@@ -166,17 +168,30 @@ def func():
 
         print('GOOOOOOL')
         return recommended_books
+    # return collaborative_filtering_recommendations()
 
     # Пример
     target_user_id = 2
     recommended_books = collaborative_filtering_recommendations(data, target_user_id)
     print(recommended_books) 
+    return recommended_books
 
 
-@api_view(['GET'])
-def calc(request):  
-    func()
-    return Response(status=status.HTTP_200_OK)
+# @api_view(['GET'])
+# def calc(request):  
+#     func()
+#     return Response(status=status.HTTP_200_OK)
+
+def get_recs(request):
+    ids = func()
+    print(ids)
+    books = Book.objects.filter(pk__in=ids)
+    return render(request, 'user_recs.html', {
+        'data' : {
+            'book_cards' : books
+        }
+    })
+
 
 @api_view(['POST'])
 @permission_classes([AllowAny])
