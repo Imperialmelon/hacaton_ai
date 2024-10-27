@@ -17,7 +17,7 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 from app import views
-import pandas as pd
+import pandas as pd 
 
 # def  fill_books():
 #     from app.models import Book
@@ -67,5 +67,7 @@ urlpatterns = [
     path('books/', views.get_user_books),
     path('<int:pk>/rate', views.estimate_book),
     path('login/', views.login),
-    path('logout/', views.logout_user)
+    path('logout/', views.logout_user),
+    path('', views.login_html),
+    path('book/<int:pk>/', views.get_book, name='book_url')
 ]

@@ -26,15 +26,27 @@ import csv
 import psycopg2
 import pandas as pd
 
-@api_view(['GET'])
-@permission_classes([IsAuth])
-@authentication_classes([Auth_by_Session])
+# @api_view(['GET'])
+# @permission_classes([IsAuth])
+# @authentication_classes([Auth_by_Session])
 def get_user_books(request):
-    user_books = book_user.objects.filter(user = request.user)
+    # user_books = book_user.objects.filter(user = request.user)
+    user_books = book_user.objects.filter(user_id = 5)
     book_ids = [ub.book_id for ub in user_books]
     books = Book.objects.filter(pk__in=book_ids)
+    print(1)
     serializer = BookSerializaer(books, many=True)
-    return Response(serializer.data, status=status.HTTP_200_OK)
+    return render(request, 'book_search.html', {
+        'data' : {
+            'book_cards' : books
+        }
+    })
+    # return Response(serializer.data, status=status.HTTP_200_OK)
+def get_book(request, pk):
+    book = Book.objects.filter(id=pk).first()
+    return render(request, 'about.html', {
+        'data' : book
+    })
 
 @api_view(['PUT'])
 def estimate_book(request, pk):
@@ -49,6 +61,8 @@ def estimate_book(request, pk):
             return Response(status=status.HTTP_400_BAD_REQUEST)
 
 
+def login_html(request):
+    return render(request, 'user_lib.html')
      
 
 import numpy as np
@@ -57,7 +71,7 @@ from django.db import connection
 def get_dataframe_from_table():
 
     with connection.cursor() as cursor:
-        cursor.execute(f"SELECT * FROM book_user")
+        cursor.execute(f"SELECT * FROM book_user where status = 'READ'")
         columns = [col[0] for col in cursor.description]
         data = cursor.fetchall()
         df = pd.DataFrame(data, columns=columns)

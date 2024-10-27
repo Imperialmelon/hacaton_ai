@@ -1,0 +1,316 @@
+
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:ital,wght@0,100;0,300;0,400;0,500;0,700;0,800;0,900;1,100;1,300;1,400;1,500;1,700;1,800;1,900&display=swap');
+ 
+.header {
+    display: flex;
+    align-items: center; /* Center items vertically */
+    justify-content: space-between; /* Space between items */
+    padding: 10px; /* Optional: Add padding for better spacing */
+}
+
+.logo_img {
+    height: 50px;
+    padding-left: 20px;
+    margin-bottom: 15px;
+    padding-right: 10px;
+}
+
+.logo {
+    padding-left: 10px;
+    color:#333232;
+    font-size: 48px;
+    font-family: "Alegreya Sans SC", sans-serif;
+    text-decoration: none; 
+    padding: 5px;
+    font-weight: bold;
+}
+
+.exit_button {
+    margin-right: 20px;
+    height: 35px;
+    padding-left: 20px;
+    margin-bottom: 15px;
+    margin-left: auto;
+}
+
+
+.taskbar {
+    position: fixed; /* Keep it at the bottom */
+    bottom: 20px; /* Space from the bottom */
+    left: 50%; /* Center horizontally */
+    transform: translateX(-50%); /* Adjust for centering */
+    width: 80%; /* Set a specific width */
+    max-width: 600px; /* Optional: limit max width */
+    background-color: #333232; /* Light background color */
+    border-radius: 20px; /* Rounded corners */
+    display: flex; /* Flexbox for alignment */
+    justify-content: space-around; /* Space out items evenly */
+    padding: 10px 0; /* Padding for spacing */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Shadow for levitation effect */
+}
+
+
+.taskbar-item {
+    text-decoration: none; /* Remove underline */
+    color: #ffffff; /* Link color */
+    font-size: 18px; /* Font size */
+    height: 40px;
+}
+
+.taskbar-item:hover {
+    color: #A1A1A1; /* Darker color on hover */
+}
+
+.btn  {
+    width: 185px !important;
+    background-color: transparent !important;
+    color: white;
+    border-radius: 10px !important;
+    border: 3px solid white !important;
+    font-weight: bold !important;
+}
+
+.card {
+    background-color: #D68A1A !important;
+    height: 650px !important;
+    width: 430px !important;
+    border-radius: 30px !important;
+    
+   
+}
+
+.card-img-top {
+    width: 410px !important;
+    height: 465px !important;
+    border-radius: 30px !important;
+    padding: 10px;
+    margin: auto;
+    /* margin-left: 10px; */
+
+}
+
+.card-text {
+    color:#ffffff;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-weight: bold;
+    font-size: 24px;
+    text-align: center;
+    background-color: transparent !important;
+    border-radius: 10px !important;
+    border: 3px solid white !important;
+    padding: 5px;
+
+}
+
+.card-title {
+    color: white !important;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif !important;
+    font-weight: bold;
+    font-size: 32px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+}
+
+
+
+.container  {
+    /* margin: 0px;
+    max-width: max-content !important; */
+}
+
+#uno {
+    background-color: red;
+    border-radius: 5px;
+    margin-left: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+
+}
+
+#dos {
+    background-color: rgb(255, 55, 0);
+    border-radius: 5px;
+    margin-left: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+#tres {
+    background-color: rgb(255, 85, 0);
+    border-radius: 5px;
+    margin-left: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+#quatro {
+    background-color: rgb(255, 149, 0);
+    border-radius: 5px;
+    margin-left: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+#cinco {
+    background-color:rgb(255, 191, 0);
+    border-radius: 5px;
+    margin-left: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+#seis {
+    background-color:rgb(255, 215, 1);
+    border-radius: 5px;
+    margin-left: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+#siete {
+    background-color:rgb(179, 255, 0);
+    border-radius: 5px;
+    margin-left: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+#ocho {
+    background-color:rgb(102, 255, 0);
+    border-radius: 5px;
+    margin-left: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+#nueve {
+    background-color:rgb(44, 190, 0);
+    border-radius: 5px;
+    margin-left: 5px;
+    padding-left: 5px;
+    cursor: pointer;
+}
+
+#diez {
+    background-color:rgb(33, 140, 0);
+    border-radius: 5px;
+    margin-left: 5px;
+    cursor: pointer;
+}
+
+.col-md-4 {
+    margin-bottom: 20px;
+}
+
+.card-title {
+    margin-top: -15px;
+}
+
+.search-barr {
+    display: flex;
+    align-items: center;
+    border-radius: 25px; 
+    background-color: #D3D3D3; 
+    padding: 10px;
+    margin-top: 20px; 
+    width: 1320px; 
+    margin: 0 auto; 
+}
+  
+.search-inputt {
+    outline: none;
+    border: none;
+    padding: 10px;
+    background-color: #D3D3D3; 
+    color: #333232;
+    flex-grow: 1; 
+    font-size: 16px;
+    font-family: 'Segoe UI';
+    border-radius: 0px 20px 20px 0px; 
+}
+  
+.search-iconn {
+    height: 25px;
+    width: 35px;
+    padding-left: 10px;
+    margin-right: 0px; 
+    border-radius: 20px 0px 0px 20px; 
+}
+
+#mrg_top {
+    margin-top: 10%;
+    width: 600px;
+}
+
+#mrg_left {
+    margin-left: 40px;
+}
+
+.reg_form {
+    background-color: #D68A1A;
+    padding: 10px;
+    border-radius: 20px;
+    width: 600px !important;
+}
+
+#width_fix {
+    width: 280px !important;
+}
+
+.form-label {
+    color: white;
+}
+
+.about_image{
+    height: 170px;
+    width: 300px !important;
+    margin-left: 240px;
+    margin-top: -240px;
+    border-radius: 20px;
+}
+
+.about_form {
+    background-color: #D68A1A;
+    padding: 10px;
+    border-radius: 20px;
+    height: 280px;
+}
+
+.smth {
+    color: #ffffff;
+    font-weight: bold;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    text-align: center;
+    
+}
+
+.ign_dec {
+    text-decoration: none !important;
+    color: #ffffff;
+}
+
+
+button {
+    background: none;
+    border: none;
+    color: inherit;
+    font: inherit;
+    cursor: pointer;
+    outline: none;
+}
+
+.card_form{
+    display: inline-block
+}
+
+#details{
+    margin-left: 10px;
+}
+
+#pub_fix {
+    width: 200px
+}

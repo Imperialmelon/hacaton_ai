@@ -1,0 +1,19 @@
+{% load static %}
+{% block book_cards2 %}
+<div class="col-md-4">
+    <div class="card">
+        <img src="{{card.img}}" class="card-img-top" alt="Card image 1">
+        <div class="card-body">
+            <h5 class="card-title">{{ card.title }}</h5>
+            <p class="card-text">
+                {{card.Book_Author}}
+            </p>
+            <a href="{% url 'book_url' card.id %}" class="btn btn-primary" id="details">Подробнее</a>
+            <form method="post" class="card_form">
+            <button class="btn btn-primary" id="finish_reading" value="{{card.id}}">Добавить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

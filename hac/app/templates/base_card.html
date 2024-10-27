@@ -1,0 +1,28 @@
+{% load static %}
+{% block book_cards %}
+<div class="col-md-4">
+    <div class="card">
+        <img src="{{card.img}}" class="card-img-top" alt="Card image 1">
+        <div class="card-body">
+            <h5 class="card-title">{{ card.title }}</h5>
+            <p class="card-text">
+                <button class="button" id = "uno" value="1"> 1 </button>
+                <button class="button" id="dos" value="2"> 2 </button>
+                <button class="button"  id="tres" value="3"> 3 </button>
+                <button class="button"  id="quatro" value="4"> 4 </button>
+                <button class="button"  id="cinco" value="5"> 5 </button>
+                <button class="button"  id="seis" value="6"> 6 </button>
+                <button class="button"  id="siete" value="7"> 7 </button>
+                <button class="button"  id="ocho" value="8"> 8 </button>
+                <button class="button"  id="nueve" value="9"> 9 </button>
+                <button class="button"  id="diez" value="10"> 10 </button>
+            </p>
+            <a href="#" class="btn btn-primary" id="details">Подробнее</a>
+            <form method="post" class="card_form">
+            <button class="btn btn-primary" id="finish_reading" value="{{card.id}}">Закончить</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+{% endblock %}
